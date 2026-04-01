@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 export default function useDebounce({
   value,
-  delay,
+  delay = 500,
 }: {
   value: string;
-  delay: number;
+  delay?: number;
 }) {
   const [debouncedValue, setDebounceValue] = useState<string>(value);
   useEffect(() => {

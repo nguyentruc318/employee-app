@@ -3,7 +3,7 @@ import Button from "../Button";
 
 type Props = {
   deletedEmployee: Employee;
-  onDelete: (id: string) => void;
+  onDelete: (id: number) => void;
 };
 export default function DeleteForm({ deletedEmployee, onDelete }: Props) {
   return (

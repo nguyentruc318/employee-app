@@ -8,12 +8,13 @@ type Props = {
 };
 export default function EmployeeForm({ initialData, onSubmit }: Props) {
   const [formData, setFormData] = useState<Employee>({
-    id: initialData?.id || "",
+    id: initialData?.id || 0,
     name: initialData?.name || "",
     age: initialData?.age || 0,
     phone: initialData?.phone || "",
     country: initialData?.country || "",
     isAvailable: initialData?.isAvailable || false,
+    avatar: initialData?.avatar || "",
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -80,6 +81,20 @@ export default function EmployeeForm({ initialData, onSubmit }: Props) {
             className={inputClass}
           />
         </div>
+        <div className="flex flex-col gap-1">
+          {/* <label className="text-sm font-medium text-gray-700">
+            Avatar URL
+          </label> */}
+          <div className="flex item-center gap-2">
+            {formData.avatar && (
+              <img
+                src={formData.avatar}
+                alt={formData.name}
+                className="w-10 h-10 rounded-full object-cover shrink-0 border border-gray-300 shadow-sm"
+              />
+            )}
+          </div>
+        </div>
         <div className="flex items-center gap-3">
           <input
             type="checkbox"
@@ -98,7 +113,9 @@ export default function EmployeeForm({ initialData, onSubmit }: Props) {
         </div>
       </div>
       <div className="mt-6">
-        <Button variant="primary">{initialData ? "Update" : "Create"}</Button>
+        <Button type="submit" variant="primary">
+          {initialData ? "Update" : "Create"}
+        </Button>
       </div>
     </form>
   );

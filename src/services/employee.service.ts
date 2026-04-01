@@ -1,15 +1,19 @@
 import http from "../utils/axios";
-import type { Employee, EmployeeQueryParams } from "../types/empolyee.type";
+import type {
+  Employee,
+  EmployeeQueryParams,
+  PaginatedResponse,
+} from "../types/empolyee.type";
 
 const employeeApi = {
   getAllEmployees: (params?: EmployeeQueryParams) =>
-    http.get<Employee[]>("/employees", { params }),
-  getEmployeeById: (id: string) => http.get<Employee>(`/employees/${id}`),
-  addEmployee: (employee: Employee) =>
+    http.get<PaginatedResponse<Employee>>("/employees", { params }),
+  getEmployeeById: (id: number) => http.get<Employee>(`/employees/${id}`),
+  addEmployee: (employee: Omit<Employee, "id">) =>
     http.post<Employee>("/employees", employee),
-  updateEmployee: (id: string, employee: Employee) =>
+  updateEmployee: (id: number, employee: Omit<Employee, "id">) =>
     http.put<Employee>(`/employees/${id}`, employee),
-  deleteEmployee: (id: string) => http.delete<void>(`/employees/${id}`),
+  deleteEmployee: (id: number) => http.delete<void>(`/employees/${id}`),
 };
 
 export default employeeApi;

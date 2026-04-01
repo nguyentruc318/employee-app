@@ -9,10 +9,17 @@ import DeleteForm from "./delete-form";
 import axios from "axios";
 import SearchEmployee from "./search-employee";
 import FilterEmployee from "./filter-employee";
+import { genAvatar } from "../../utils/generate-avatar";
+import Pagination from "../pagination";
+import { ITEM_PER_PAGE } from "../../constants/contanst";
+import SortItem from "./sort-item";
 
 export default function EmployeeList() {
   const [employee, setEmployee] = useState<Employee[]>([]);
   const [search, setSearch] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [sortItem, setSortItem] = useState<string>("");
+  const [totalPages, setTotalPages] = useState<number>(10);
   const [filterCountry, setFilterCountry] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -24,12 +31,17 @@ export default function EmployeeList() {
   const fetchEmployees = async () => {
     try {
       setIsLoading(true);
+
       const params = {
         ...(search && { "name:contains": search }),
         ...(filterCountry && { country: filterCountry }),
+        _page: currentPage,
+        _per_page: ITEM_PER_PAGE,
+        ...(sortItem ? { _sort: sortItem } : {}),
       };
       const response = await employeeApi.getAllEmployees(params);
-      setEmployee(response.data);
+      setEmployee(response.data.data);
+      setTotalPages(response.data.pages);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
@@ -44,7 +56,7 @@ export default function EmployeeList() {
   };
   useEffect(() => {
     fetchEmployees();
-  }, [search, filterCountry]);
+  }, [search, filterCountry, currentPage, sortItem]);
   const handleEdit = (employee: Employee) => {
     setIsModalOpen(true);
     setSelectedEmployee(employee);
@@ -54,14 +66,15 @@ export default function EmployeeList() {
     setSelectedEmployee(null);
   };
 
-  const handleSubmit = async (data: Employee) => {
+  const handleSubmit = async (data: Omit<Employee, "id">) => {
     try {
       if (selectedEmployee) {
         await employeeApi.updateEmployee(selectedEmployee.id, data);
       } else {
-        const newEmployee = { ...data, id: Date.now().toString() };
+        const newEmployee = { ...data, avatar: genAvatar(employee.length) };
         await employeeApi.addEmployee(newEmployee);
       }
+      setIsModalOpen(false);
       await fetchEmployees();
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -73,7 +86,7 @@ export default function EmployeeList() {
       }
     }
   };
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     try {
       await employeeApi.deleteEmployee(id);
       await fetchEmployees();
@@ -93,6 +106,10 @@ export default function EmployeeList() {
     setSelectedEmployee(employee);
     setIsDeleteModalOpen(true);
   };
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div>
       <div className="h-6">{isLoading && <p>Loading...</p>}</div>
@@ -103,6 +120,7 @@ export default function EmployeeList() {
       <div className="flex gap-2 ">
         <SearchEmployee onSearch={setSearch} />
         <FilterEmployee onFilter={setFilterCountry} />
+        <SortItem onSort={setSortItem} />
       </div>
       {employee && (
         <EmployeeTable
@@ -111,6 +129,11 @@ export default function EmployeeList() {
           onDeleteClick={handleDeleteClick}
         />
       )}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           <EmployeeForm
