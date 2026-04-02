@@ -2,8 +2,8 @@
   "employees": [
     {
       "id": "1",
-      "name": "Nguyen Van Trúc",
-      "age": 28,
+      "name": "Nguyen Van D",
+      "age": "29",
       "phone": "0901234567",
       "country": "Vietnam",
       "isAvailable": true,
@@ -11,7 +11,7 @@
     },
     {
       "id": "2",
-      "name": "Tran Thi Bich",
+      "name": "Tran Thi Bic",
       "age": 32,
       "phone": "0912345678",
       "country": "Vietnam",
@@ -20,7 +20,7 @@
     },
     {
       "id": "3",
-      "name": "Le Hoang Minh",
+      "name": "Le Hoang Minh ",
       "age": 25,
       "phone": "0923456789",
       "country": "Vietnam",
@@ -57,15 +57,15 @@
     {
       "id": "7",
       "name": "Kim Soo Jin",
-      "age": 27,
+      "age": "29",
       "phone": "+82-10-9876-5432",
-      "country": "Korea",
+      "country": "chinese",
       "isAvailable": true,
       "avatar": "https://i.pravatar.cc/150?u=7"
     },
     {
       "id": "8",
-      "name": "Vo Minh Tuan",
+      "name": "Vo Minh Tu",
       "age": 40,
       "phone": "0945678901",
       "country": "Vietnam",
@@ -89,24 +89,6 @@
       "country": "Vietnam",
       "isAvailable": false,
       "avatar": "https://i.pravatar.cc/150?u=10"
-    },
-    {
-      "id": "PfWWhJMBw7o",
-      "name": "kk ",
-      "age": "23",
-      "phone": "0394084336",
-      "country": "Vietnam",
-      "isAvailable": true,
-      "avatar": "https://i.pravatar.cc/150?u=10"
-    },
-    {
-      "id": "ZuXPl7CyiN8",
-      "name": "Truc Bui Nguyen",
-      "age": "23",
-      "phone": "0123456985",
-      "country": "Vietnam",
-      "isAvailable": false,
-      "avatar": "https://i.pravatar.cc/150?u=11"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -9,8 +9,7 @@ function App() {
       <Route element={<ProtectedRoute />}>
         <Route path="/employee" element={<EmployeePage />} />
       </Route>
-
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/" element={<Navigate to="/employee" replace />} />
       <Route path="/login" element={<LoginPage />} />
     </Routes>
   );

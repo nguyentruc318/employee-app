@@ -1,5 +1,5 @@
 import type { Employee } from "../../types/empolyee.type";
-import Button from "../Button";
+
 import EmployeeRow from "./empolyee-row";
 
 interface EmployeeTableProps {

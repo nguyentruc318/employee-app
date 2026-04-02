@@ -6,6 +6,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { useAppStore } from "../../store";
 import { decodeToken } from "../../utils/token";
 import FacebookLogin from "@greatsumini/react-facebook-login";
+
 const FacebookLoginComponent = (FacebookLogin as any).default || FacebookLogin;
 export default function LoginForm() {
   const login = useAppStore((state) => state.login);
@@ -73,6 +74,7 @@ export default function LoginForm() {
             const user = decodeToken(credentialResponse.credential!);
             if (user) {
               login(user);
+
               navigate("/employee");
             }
           }}

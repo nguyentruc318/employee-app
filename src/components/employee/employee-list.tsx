@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { Employee } from "../../types/empolyee.type";
 import employeeApi from "../../services/employee.service";
 import EmployeeTable from "./employee-table";
@@ -13,6 +13,9 @@ import { genAvatar } from "../../utils/generate-avatar";
 import Pagination from "../pagination";
 import { ITEM_PER_PAGE } from "../../constants/contanst";
 import SortItem from "./sort-item";
+import socket from "../../utils/socket";
+import toast from "react-hot-toast";
+import { useAppStore } from "../../store";
 
 export default function EmployeeList() {
   const [employee, setEmployee] = useState<Employee[]>([]);
@@ -27,11 +30,11 @@ export default function EmployeeList() {
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
     null,
   );
+  const addActivity = useAppStore((state) => state.addActivity);
   const [error, setError] = useState("");
-  const fetchEmployees = async () => {
+  const fetchEmployees = useCallback(async () => {
     try {
       setIsLoading(true);
-
       const params = {
         ...(search && { "name:contains": search }),
         ...(filterCountry && { country: filterCountry }),
@@ -53,10 +56,48 @@ export default function EmployeeList() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [search, filterCountry, currentPage, sortItem]);
   useEffect(() => {
     fetchEmployees();
-  }, [search, filterCountry, currentPage, sortItem]);
+  }, [fetchEmployees]);
+  const handleEmployeeChanged = useCallback(
+    (data: { type: "add" | "update" | "delete"; name: string }) => {
+      switch (data.type) {
+        case "add":
+          toast.success(`Thông báo mới: ${data.name} đã được thêm vào list`, {
+            position: "bottom-right",
+          });
+          break;
+
+        case "update":
+          toast.success(`Thông báo mới: ${data.name} đã được cập nhật tên`, {
+            position: "bottom-right",
+            className: "bg-green-500 text-white",
+          });
+          break;
+
+        case "delete":
+          toast.success(`Thông báo mới: ${data.name} đã được xóa`, {
+            position: "bottom-right",
+            className: "bg-green-500 text-white",
+          });
+          break;
+
+        default:
+          break;
+      }
+      addActivity({ type: data.type, name: data.name });
+      fetchEmployees();
+    },
+    [fetchEmployees, addActivity],
+  );
+  useEffect(() => {
+    socket.on("employee_changed", handleEmployeeChanged);
+    return () => {
+      socket.off("employee_changed", handleEmployeeChanged);
+    };
+  }, [handleEmployeeChanged]);
+
   const handleEdit = (employee: Employee) => {
     setIsModalOpen(true);
     setSelectedEmployee(employee);
@@ -66,30 +107,11 @@ export default function EmployeeList() {
     setSelectedEmployee(null);
   };
 
-  const handleSubmit = async (data: Omit<Employee, "id">) => {
-    try {
-      if (selectedEmployee) {
-        await employeeApi.updateEmployee(selectedEmployee.id, data);
-      } else {
-        const newEmployee = { ...data, avatar: genAvatar(employee.length) };
-        await employeeApi.addEmployee(newEmployee);
-      }
-      setIsModalOpen(false);
-      await fetchEmployees();
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          setError(error.response.data.message);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-  };
   const handleDelete = async (id: number) => {
     try {
       await employeeApi.deleteEmployee(id);
-      await fetchEmployees();
+      socket.emit("notify_change", { type: "delete" });
+
       setIsDeleteModalOpen(false);
       setSelectedEmployee(null);
     } catch (error) {
@@ -109,7 +131,27 @@ export default function EmployeeList() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-
+  const handleSubmit = async (data: Omit<Employee, "id">) => {
+    try {
+      if (selectedEmployee) {
+        await employeeApi.updateEmployee(selectedEmployee.id, data);
+        socket.emit("notify_change", { type: "update", name: data.name });
+      } else {
+        const newEmployee = { ...data, avatar: genAvatar(employee.length) };
+        await employeeApi.addEmployee(newEmployee);
+        socket.emit("notify_change", { type: "add", name: data.name });
+      }
+      setIsModalOpen(false);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          setError(error.response.data.message);
+        } else {
+          setError(error.message);
+        }
+      }
+    }
+  };
   return (
     <div>
       <div className="h-6">{isLoading && <p>Loading...</p>}</div>

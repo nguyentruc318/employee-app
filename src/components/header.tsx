@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../store";
+import { useEffect, useState } from "react";
+import socket from "../utils/socket";
 
 const Header = () => {
   const user = useAppStore((state) => state.user);
   const logout = useAppStore((state) => state.logout);
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    socket.disconnect();
     logout();
     localStorage.removeItem("auth-storage");
     navigate("/login");
