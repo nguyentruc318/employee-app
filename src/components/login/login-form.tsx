@@ -1,11 +1,12 @@
 import { useState } from "react";
-import type { LoginBodyType } from "../../types/empolyee.type";
+import type { GoogleUser, LoginBodyType } from "../../types/empolyee.type";
 import Button from "../Button";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { useAppStore } from "../../store";
 import { decodeToken } from "../../utils/token";
-
+import FacebookLogin from "@greatsumini/react-facebook-login";
+const FacebookLoginComponent = (FacebookLogin as any).default || FacebookLogin;
 export default function LoginForm() {
   const login = useAppStore((state) => state.login);
   const navigate = useNavigate();
@@ -77,6 +78,27 @@ export default function LoginForm() {
           }}
           onError={() => {
             console.log("Login Failed");
+          }}
+        />
+        <FacebookLoginComponent
+          appId={import.meta.env.VITE_FACEBOOK_APP_ID}
+          className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 mt-2 transition duration-200"
+          onFail={(error: any) => {
+            console.log("Đăng nhập thất bại!", error);
+          }}
+          onProfileSuccess={(response: any) => {
+            console.log("Lấy Profile thành công!", response);
+            const user = {
+              name: response.name,
+              email: response.email,
+              picture: response.picture?.data?.url,
+              sub: response.id,
+            };
+
+            if (user) {
+              login(user as GoogleUser);
+              navigate("/employee");
+            }
           }}
         />
       </form>
