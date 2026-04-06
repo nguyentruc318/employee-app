@@ -73,5 +73,11 @@
     "title": "404 - Page Not Found",
     "description": "Oops! The page you are looking for doesn't exist or has been moved.",
     "back_home": "Back to Home"
+  },
+  "error": {
+    "title": "An error occurred",
+    "description": "Sorry, an error occurred. Please try again later.",
+    "reload_btn": "Reload page",
+    "back_home": "Back to Home"
   }
 }

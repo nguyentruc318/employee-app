@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../store";
-import socket from "../utils/socket";
 import LanguageSwitcher from "./language-switcher";
 import { useTranslation } from "react-i18next";
 import Button from "./Button";
@@ -12,7 +11,6 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    socket.disconnect();
     logout();
     localStorage.removeItem("auth-storage");
     navigate("/login");
