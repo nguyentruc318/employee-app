@@ -58,13 +58,18 @@
     "activity": {
       "title": "Nhật ký hoạt động",
       "empty": "Chưa có hoạt động nào...",
-      "added": "<bold>{{name}}</bold> vừa được thêm mới.",
-      "updated": "<bold>{{name}}</bold> vừa được cập nhật.",
-      "deleted": "<bold>{{name}}</bold> vừa bị xóa khỏi hệ thống."
+      "added": "{{name}} vừa được thêm mới.",
+      "updated": "{{name}} vừa được cập nhật.",
+      "deleted": "{{name}} vừa bị xóa khỏi hệ thống."
     },
     "common": {
       "previous": "Trước",
       "next": "Sau"
     }
+  },
+  "not_found": {
+    "title": "404 - Không tìm thấy trang",
+    "description": "Rất tiếc, trang bạn đang tìm kiếm không tồn tại hoặc đã bị di chuyển.",
+    "back_home": "Quay về trang chủ"
   }
 }

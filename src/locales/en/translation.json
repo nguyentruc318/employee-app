@@ -59,14 +59,19 @@
     "activity": {
       "title": "Activity Log",
       "empty": "No activities yet...",
-      "added": "<bold>{{name}}</bold> was just added.",
-      "updated": "<bold>{{name}}</bold> was just updated.",
-      "deleted": "<bold>{{name}}</bold> was just deleted."
+      "added": "{{name}} was just added.",
+      "updated": "{{name}} was just updated.",
+      "deleted": "{{name}} was just deleted."
     },
 
     "common": {
       "previous": "Previous",
       "next": "Next"
     }
+  },
+  "not_found": {
+    "title": "404 - Page Not Found",
+    "description": "Oops! The page you are looking for doesn't exist or has been moved.",
+    "back_home": "Back to Home"
   }
 }
