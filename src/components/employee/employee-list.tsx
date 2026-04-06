@@ -16,8 +16,10 @@ import SortItem from "./sort-item";
 import socket from "../../utils/socket";
 import toast from "react-hot-toast";
 import { useAppStore } from "../../store";
+import { useTranslation } from "react-i18next";
 
 export default function EmployeeList() {
+  const { t } = useTranslation();
   const [employee, setEmployee] = useState<Employee[]>([]);
   const [search, setSearch] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -32,55 +34,72 @@ export default function EmployeeList() {
   );
   const addActivity = useAppStore((state) => state.addActivity);
   const [error, setError] = useState("");
-  const fetchEmployees = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      const params = {
-        ...(search && { "name:contains": search }),
-        ...(filterCountry && { country: filterCountry }),
-        _page: currentPage,
-        _per_page: ITEM_PER_PAGE,
-        ...(sortItem ? { _sort: sortItem } : {}),
-      };
-      const response = await employeeApi.getAllEmployees(params);
-      setEmployee(response.data.data);
-      setTotalPages(response.data.pages);
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          setError(error.response.data.message);
-        } else {
-          setError(error.message);
+  const fetchEmployees = useCallback(
+    async (signal?: AbortSignal) => {
+      try {
+        setIsLoading(true);
+        const params = {
+          ...(search && { "name:contains": search }),
+          ...(filterCountry && { country: filterCountry }),
+          _page: currentPage,
+          _per_page: ITEM_PER_PAGE,
+          ...(sortItem ? { _sort: sortItem } : {}),
+        };
+        const response = await employeeApi.getAllEmployees(params, {
+          signal,
+        });
+        setEmployee(response.data.data);
+        setTotalPages(response.data.pages);
+      } catch (error) {
+        if (axios.isCancel(error)) return;
+        if (axios.isAxiosError(error)) {
+          if (error.response) {
+            setError(error.response.data.message);
+          } else {
+            setError(error.message);
+          }
         }
+      } finally {
+        setIsLoading(false);
       }
-    } finally {
-      setIsLoading(false);
-    }
-  }, [search, filterCountry, currentPage, sortItem]);
+    },
+    [search, filterCountry, currentPage, sortItem],
+  );
   useEffect(() => {
-    fetchEmployees();
+    const controller = new AbortController();
+    fetchEmployees(controller.signal);
+    return () => controller.abort();
   }, [fetchEmployees]);
   const handleEmployeeChanged = useCallback(
     (data: { type: "add" | "update" | "delete"; name: string }) => {
       switch (data.type) {
         case "add":
-          toast.success(`Thông báo mới: ${data.name} đã được thêm vào list`, {
-            position: "bottom-right",
-          });
+          toast.success(
+            t("employee.notifications.add_success", { name: data.name }),
+            {
+              position: "bottom-right",
+            },
+          );
           break;
 
         case "update":
-          toast.success(`Thông báo mới: ${data.name} đã được cập nhật tên`, {
-            position: "bottom-right",
-            className: "bg-green-500 text-white",
-          });
+          toast.success(
+            t("employee.notifications.update_success", { name: data.name }),
+            {
+              position: "bottom-right",
+              className: "bg-green-500 text-white",
+            },
+          );
           break;
 
         case "delete":
-          toast.success(`Thông báo mới: ${data.name} đã được xóa`, {
-            position: "bottom-right",
-            className: "bg-green-500 text-white",
-          });
+          toast.success(
+            t("employee.notifications.delete_success", { name: data.name }),
+            {
+              position: "bottom-right",
+              className: "bg-green-500 text-white",
+            },
+          );
           break;
 
         default:
@@ -89,7 +108,7 @@ export default function EmployeeList() {
       addActivity({ type: data.type, name: data.name });
       fetchEmployees();
     },
-    [fetchEmployees, addActivity],
+    [fetchEmployees, addActivity, t],
   );
   useEffect(() => {
     socket.on("employee_changed", handleEmployeeChanged);
@@ -154,12 +173,11 @@ export default function EmployeeList() {
   };
   return (
     <div>
-      <div className="h-6">{isLoading && <p>Loading...</p>}</div>
       {error && <p>{error}</p>}
       <Button onClick={handleAdd} className="mb-2" variant="primary">
-        Add Employee
+        {t("employee.add_btn")}
       </Button>
-      <div className="flex gap-2 ">
+      <div className="grid grid-cols-1 md:flex md:gap-2 ">
         <SearchEmployee onSearch={setSearch} />
         <FilterEmployee onFilter={setFilterCountry} />
         <SortItem onSort={setSortItem} />

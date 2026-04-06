@@ -1,12 +1,14 @@
 import { useState } from "react";
 import type { Employee } from "../../types/empolyee.type";
 import Button from "../Button";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   initialData?: Employee | null;
   onSubmit: (data: Employee) => void;
 };
 export default function EmployeeForm({ initialData, onSubmit }: Props) {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<Employee>({
     id: initialData?.id || 0,
     name: initialData?.name || "",
@@ -34,47 +36,57 @@ export default function EmployeeForm({ initialData, onSubmit }: Props) {
   return (
     <form onSubmit={handleSubmit} className="w-96">
       <h2 className="text-xl font-semibold mb-4 text-gray-800">
-        {initialData ? "Edit Employee" : "Add Employee"}
+        {initialData
+          ? t("employee.form.edit_title")
+          : t("employee.form.add_title")}
       </h2>
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium text-gray-700">Name</label>
+          <label className="text-sm font-medium text-gray-700">
+            {t("employee.table.name")}
+          </label>
           <input
             type="text"
             name="name"
             value={formData.name}
-            placeholder="Enter name"
+            placeholder={t("employee.form.placeholder_name")}
             onChange={handleChange}
             className={inputClass}
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium text-gray-700">Age</label>
+          <label className="text-sm font-medium text-gray-700">
+            {t("employee.table.age")}
+          </label>
           <input
             type="number"
             name="age"
-            placeholder="Enter age"
+            placeholder={t("employee.form.age_placeholder")}
             value={formData.age}
             onChange={handleChange}
             className={inputClass}
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium text-gray-700">Phone</label>
+          <label className="text-sm font-medium text-gray-700">
+            {t("employee.table.phone")}
+          </label>
           <input
             type="text"
             name="phone"
-            placeholder="Enter phone number"
+            placeholder={t("employee.form.placeholder_phone")}
             value={formData.phone}
             onChange={handleChange}
             className={inputClass}
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium text-gray-700">Country</label>
+          <label className="text-sm font-medium text-gray-700">
+            {t("employee.table.country")}
+          </label>
           <input
             type="text"
-            placeholder="Enter country"
+            placeholder={t("employee.form.placeholder_country")}
             name="country"
             value={formData.country}
             onChange={handleChange}
@@ -114,7 +126,7 @@ export default function EmployeeForm({ initialData, onSubmit }: Props) {
       </div>
       <div className="mt-6">
         <Button type="submit" variant="primary">
-          {initialData ? "Update" : "Create"}
+          {initialData ? t("employee.form.save") : t("employee.form.add")}
         </Button>
       </div>
     </form>

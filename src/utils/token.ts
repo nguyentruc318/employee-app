@@ -1,9 +1,9 @@
 import { jwtDecode } from "jwt-decode";
-import type { GoogleUser } from "../types/empolyee.type";
+import type { AuthUser } from "../types/empolyee.type";
 
-export const decodeToken = (token: string): GoogleUser | null => {
+export const decodeToken = (token: string): AuthUser | null => {
   try {
-    const user = jwtDecode<GoogleUser>(token);
+    const user = jwtDecode<AuthUser>(token);
     return user;
   } catch (error) {
     console.log(error);

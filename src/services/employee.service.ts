@@ -4,10 +4,14 @@ import type {
   EmployeeQueryParams,
   PaginatedResponse,
 } from "../types/empolyee.type";
+import type { AxiosRequestConfig } from "axios";
 
 const employeeApi = {
-  getAllEmployees: (params?: EmployeeQueryParams) =>
-    http.get<PaginatedResponse<Employee>>("/employees", { params }),
+  getAllEmployees: (
+    params?: EmployeeQueryParams,
+    config?: AxiosRequestConfig,
+  ) =>
+    http.get<PaginatedResponse<Employee>>("/employees", { params, ...config }),
   getEmployeeById: (id: number) => http.get<Employee>(`/employees/${id}`),
   addEmployee: (employee: Omit<Employee, "id">) =>
     http.post<Employee>("/employees", employee),

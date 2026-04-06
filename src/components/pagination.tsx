@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import Button from "./Button";
 
 type Props = {
@@ -11,6 +12,7 @@ export default function Pagination({
   totalPages,
   onPageChange,
 }: Props) {
+  const { t } = useTranslation();
   const getPageNumbers = () => {
     const pages: (number | string)[] = [];
     if (totalPages <= 7) {
@@ -50,7 +52,7 @@ export default function Pagination({
         disabled={currentPage === 1}
         className="px-4 py-2 border border-gray-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Previous
+        {t("employee.common.previous")}
       </Button>
       {pages.map((page, index) => {
         if (page === "...") {
@@ -75,7 +77,7 @@ export default function Pagination({
         disabled={currentPage === totalPages}
         className="px-4 py-2 border border-gray-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Next
+        {t("employee.common.next")}
       </Button>
     </div>
   );

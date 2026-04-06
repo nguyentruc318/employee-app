@@ -1,16 +1,19 @@
 import { useState } from "react";
-import type { GoogleUser, LoginBodyType } from "../../types/empolyee.type";
+import type { AuthUser, LoginBodyType } from "../../types/empolyee.type";
 import Button from "../Button";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin } from "@react-oauth/google";
 import { useAppStore } from "../../store";
-import { decodeToken } from "../../utils/token";
 import FacebookLogin from "@greatsumini/react-facebook-login";
+import { useTranslation } from "react-i18next";
+import { useGoogleAuth } from "../../hooks/use-google-oauth";
 
 const FacebookLoginComponent = (FacebookLogin as any).default || FacebookLogin;
 export default function LoginForm() {
   const login = useAppStore((state) => state.login);
   const navigate = useNavigate();
+  const { loginWithGoogle } = useGoogleAuth();
+
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<LoginBodyType>({
     username: "",
     password: "",
@@ -41,50 +44,48 @@ export default function LoginForm() {
         className="max-w-sm w-full p-6 bg-white rounded-lg shadow-md flex flex-col space-y-4"
       >
         <h2 className="text-2xl font-semibold text-gray-800 mb-2 text-center">
-          Sign In
+          {t("login.title")}
         </h2>
 
         <div className="flex flex-col space-y-1">
-          <label className="text-sm font-medium text-gray-700">Username</label>
+          <label className="text-sm font-medium text-gray-700">
+            {t("login.username")}
+          </label>
           <input
             type="text"
             name="username"
             className="px-4 py-2 border border-gray-300 rounded-md"
-            placeholder="Enter username"
+            placeholder={t("login.placeholder_user")}
             onChange={handleChange}
           />
         </div>
 
         <div className="flex flex-col space-y-1">
-          <label className="text-sm font-medium text-gray-700">Password</label>
+          <label className="text-sm font-medium text-gray-700">
+            {t("login.password")}
+          </label>
           <input
             type="password"
             name="password"
             className="px-4 py-2 border border-gray-300 rounded-md"
-            placeholder="Enter password"
+            placeholder={t("login.placeholder_pass")}
             onChange={handleChange}
           />
         </div>
 
         <Button type="submit" variant="primary">
-          Login
+          {t("login.submit")}
         </Button>
-        <GoogleLogin
-          onSuccess={(credentialResponse) => {
-            const user = decodeToken(credentialResponse.credential!);
-            if (user) {
-              login(user);
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => loginWithGoogle()}
+        >
+          {t("login.google_submit")}
+        </Button>
 
-              navigate("/employee");
-            }
-          }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
-        />
         <FacebookLoginComponent
           appId={import.meta.env.VITE_FACEBOOK_APP_ID}
-          className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 mt-2 transition duration-200"
           onFail={(error: any) => {
             console.log("Đăng nhập thất bại!", error);
           }}
@@ -98,10 +99,15 @@ export default function LoginForm() {
             };
 
             if (user) {
-              login(user as GoogleUser);
+              login(user as AuthUser);
               navigate("/employee");
             }
           }}
+          render={({ onClick }: { onClick: () => void }) => (
+            <Button type="button" variant="outline" onClick={onClick}>
+              {t("login.facebook_submit")}
+            </Button>
+          )}
         />
       </form>
     </div>

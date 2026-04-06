@@ -1,9 +1,9 @@
 import type { StateCreator } from "zustand";
-import type { GoogleUser } from "../../types/empolyee.type";
+import type { AuthUser } from "../../types/empolyee.type";
 
 export interface AuthSlice {
-  user: GoogleUser | null;
-  login: (userData: GoogleUser) => void;
+  user: AuthUser | null;
+  login: (userData: AuthUser) => void;
   logout: () => void;
 }
 export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({

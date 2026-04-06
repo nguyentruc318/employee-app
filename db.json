@@ -59,7 +59,7 @@
       "name": "Kim Soo Jin",
       "age": "29",
       "phone": "+82-10-9876-5432",
-      "country": "chinese",
+      "country": "Korea",
       "isAvailable": true,
       "avatar": "https://i.pravatar.cc/150?u=7"
     },
@@ -89,6 +89,303 @@
       "country": "Vietnam",
       "isAvailable": false,
       "avatar": "https://i.pravatar.cc/150?u=10"
+    },
+    {
+      "id": "11",
+      "name": "David Miller",
+      "age": 45,
+      "phone": "0123984755",
+      "country": "USA",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=11"
+    },
+    {
+      "id": "12",
+      "name": "Sato Hiroshi",
+      "age": 28,
+      "phone": "0987654321",
+      "country": "Japan",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=12"
+    },
+    {
+      "id": "13",
+      "name": "Le Van Nam",
+      "age": 30,
+      "phone": "0911223344",
+      "country": "Vietnam",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=13"
+    },
+    {
+      "id": "14",
+      "name": "Alice Wong",
+      "age": 27,
+      "phone": "0922334455",
+      "country": "USA",
+      "isAvailable": false,
+      "avatar": "https://i.pravatar.cc/150?u=14"
+    },
+    {
+      "id": "15",
+      "name": "Park Ji Sung",
+      "age": 31,
+      "phone": "0933445566",
+      "country": "Korea",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=15"
+    },
+    {
+      "id": "16",
+      "name": "Nguyen Hoang Anh",
+      "age": 24,
+      "phone": "0944556677",
+      "country": "Vietnam",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=16"
+    },
+    {
+      "id": "17",
+      "name": "James Wilson",
+      "age": 38,
+      "phone": "0955667788",
+      "country": "USA",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=17"
+    },
+    {
+      "id": "18",
+      "name": "Suzuki Ichiro",
+      "age": 42,
+      "phone": "0966778899",
+      "country": "Japan",
+      "isAvailable": false,
+      "avatar": "https://i.pravatar.cc/150?u=18"
+    },
+    {
+      "id": "19",
+      "name": "Tran Minh Quan",
+      "age": 29,
+      "phone": "0977889900",
+      "country": "Vietnam",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=19"
+    },
+    {
+      "id": "20",
+      "name": "Sara Connor",
+      "age": 34,
+      "phone": "0988990011",
+      "country": "USA",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=20"
+    },
+    {
+      "id": "21",
+      "name": "Choi Min-ho",
+      "age": 26,
+      "phone": "0999001122",
+      "country": "Korea",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=21"
+    },
+    {
+      "id": "22",
+      "name": "Phan Van Khai",
+      "age": 33,
+      "phone": "0900112233",
+      "country": "Vietnam",
+      "isAvailable": false,
+      "avatar": "https://i.pravatar.cc/150?u=22"
+    },
+    {
+      "id": "23",
+      "name": "Robert Brown",
+      "age": 40,
+      "phone": "0911223344",
+      "country": "USA",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=23"
+    },
+    {
+      "id": "24",
+      "name": "Nakamura Kaito",
+      "age": 31,
+      "phone": "0922334455",
+      "country": "Japan",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=24"
+    },
+    {
+      "id": "25",
+      "name": "Dinh Van Thang",
+      "age": 27,
+      "phone": "0933445566",
+      "country": "Vietnam",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=25"
+    },
+    {
+      "id": "26",
+      "name": "Linda White",
+      "age": 29,
+      "phone": "0944556677",
+      "country": "USA",
+      "isAvailable": false,
+      "avatar": "https://i.pravatar.cc/150?u=26"
+    },
+    {
+      "id": "27",
+      "name": "Lee Min-ho",
+      "age": 35,
+      "phone": "0955667788",
+      "country": "Korea",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=27"
+    },
+    {
+      "id": "28",
+      "name": "Vu Ngoc Duy",
+      "age": 30,
+      "phone": "0966778899",
+      "country": "Vietnam",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=28"
+    },
+    {
+      "id": "29",
+      "name": "Michael Clark",
+      "age": 44,
+      "phone": "0977889900",
+      "country": "USA",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=29"
+    },
+    {
+      "id": "30",
+      "name": "Watanabe Haruto",
+      "age": 25,
+      "phone": "0988990011",
+      "country": "Japan",
+      "isAvailable": false,
+      "avatar": "https://i.pravatar.cc/150?u=30"
+    },
+    {
+      "id": "31",
+      "name": "Tran Thi Thu",
+      "age": 28,
+      "phone": "0999001122",
+      "country": "Vietnam",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=31"
+    },
+    {
+      "id": "32",
+      "name": "Kevin Lee",
+      "age": 32,
+      "phone": "0900112233",
+      "country": "USA",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=32"
+    },
+    {
+      "id": "33",
+      "name": "Jung Eun-ji",
+      "age": 27,
+      "phone": "0911223344",
+      "country": "Korea",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=33"
+    },
+    {
+      "id": "34",
+      "name": "Pham Quang Vinh",
+      "age": 31,
+      "phone": "0922334455",
+      "country": "Vietnam",
+      "isAvailable": false,
+      "avatar": "https://i.pravatar.cc/150?u=34"
+    },
+    {
+      "id": "35",
+      "name": "Elizabeth Reed",
+      "age": 39,
+      "phone": "0933445566",
+      "country": "USA",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=35"
+    },
+    {
+      "id": "36",
+      "name": "Kobayashi Ryu",
+      "age": 41,
+      "phone": "0944556677",
+      "country": "Japan",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=36"
+    },
+    {
+      "id": "37",
+      "name": "Doan Van Hau",
+      "age": 23,
+      "phone": "0955667788",
+      "country": "Vietnam",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=37"
+    },
+    {
+      "id": "38",
+      "name": "Thomas Evans",
+      "age": 43,
+      "phone": "0966778899",
+      "country": "USA",
+      "isAvailable": false,
+      "avatar": "https://i.pravatar.cc/150?u=38"
+    },
+    {
+      "id": "39",
+      "name": "Song Hye-kyo",
+      "age": 36,
+      "phone": "0977889900",
+      "country": "Korea",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=39"
+    },
+    {
+      "id": "40",
+      "name": "Trinh Van Quyet",
+      "age": 46,
+      "phone": "0988990011",
+      "country": "Vietnam",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=40"
+    },
+    {
+      "id": "41",
+      "name": "Sophie Martin",
+      "age": 29,
+      "phone": "0999001122",
+      "country": "USA",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=41"
+    },
+    {
+      "id": "42",
+      "name": "Inoue Aoi",
+      "age": 24,
+      "phone": "0900112233",
+      "country": "Japan",
+      "isAvailable": false,
+      "avatar": "https://i.pravatar.cc/150?u=42"
+    },
+    {
+      "id": "43",
+      "name": "Nguyen Thanh Thang",
+      "age": 32,
+      "phone": "0911223344",
+      "country": "Vietnam",
+      "isAvailable": true,
+      "avatar": "https://i.pravatar.cc/150?u=43"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../store";
-import { useEffect, useState } from "react";
 import socket from "../utils/socket";
+import LanguageSwitcher from "./language-switcher";
+import { useTranslation } from "react-i18next";
+import Button from "./Button";
 
 const Header = () => {
   const user = useAppStore((state) => state.user);
   const logout = useAppStore((state) => state.logout);
-
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -26,6 +28,7 @@ const Header = () => {
           <span className="text-xl font-bold text-gray-800 hidden sm:block">
             Employee App
           </span>
+          <LanguageSwitcher />
         </div>
 
         {user && (
@@ -46,12 +49,12 @@ const Header = () => {
                 className="w-10 h-10 rounded-full border-2 border-gray-200"
               />
             </div>
-            <button
+            <Button
               onClick={handleLogout}
-              className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-md transition duration-200"
+              className="px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-red-600 hover:bg-red-500 rounded-md transition duration-200"
             >
-              Logout
-            </button>
+              <span className="sm:inline">{t("logout")}</span>
+            </Button>
           </div>
         )}
       </div>

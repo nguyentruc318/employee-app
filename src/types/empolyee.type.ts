@@ -35,9 +35,19 @@ export interface PaginatedResponse<T> {
   items: number;
   data: T[];
 }
-export interface GoogleUser {
+export interface AuthUser {
   name: string;
   email: string;
   picture: string;
   sub: string; // ID người dùng
+}
+export interface FacebookProfile {
+  id: string;
+  name: string;
+  email?: string;
+  picture?: {
+    data: {
+      url: string;
+    };
+  };
 }

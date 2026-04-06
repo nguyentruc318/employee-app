@@ -1,0 +1,70 @@
+{
+  "login": {
+    "title": "Đăng nhập",
+    "username": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "submit": "Đăng nhập",
+    "google_submit": "Đăng nhập với Google",
+    "facebook_submit": "Đăng nhập với Facebook",
+    "placeholder_user": "Nhập tên đăng nhập...",
+    "placeholder_pass": "Nhập mật khẩu..."
+  },
+  "logout": "Đăng xuất",
+  "employee": {
+    "title": "Quản lý nhân viên",
+    "add_btn": "Thêm nhân viên",
+    "search_placeholder": "Tìm kiếm theo tên...",
+    "filter_countries": "Quốc gia",
+    "countries": {
+      "vietnam": "Việt Nam",
+      "usa": "Mỹ",
+      "japan": "Nhật Bản",
+      "korea": "Hàn Quốc"
+    },
+    "age_unit": "tuổi",
+    "table": {
+      "name": "Họ và tên",
+      "age": "Tuổi",
+      "email": "Email",
+      "phone": "Số điện thoại",
+      "department": "Phòng ban",
+      "country": "Quốc gia",
+      "actions": "Thao tác"
+    },
+    "form": {
+      "add_title": "Thêm nhân viên mới",
+      "edit_title": "Chỉnh sửa ",
+      "save": "Lưu ",
+      "cancel": "Hủy bỏ",
+      "delete_confirm": "Bạn có chắc chắn muốn xóa nhân viên này?",
+      "delete": "Xóa",
+      "placeholder_name": "Nhập tên...",
+      "placeholder_age": "Nhập tuổi...",
+      "placeholder_phone": "Nhập số điện thoại...",
+      "placeholder_country": "Nhập quốc gia..."
+    },
+    "notifications": {
+      "add_success": "Thêm nhân viên thành công!",
+      "update_success": "Cập nhật thành công!",
+      "delete_success": "Đã xóa nhân viên."
+    },
+    "sort": {
+      "placeholder": "Sắp xếp theo",
+      "name_asc": "Tên (A-Z)",
+      "name_desc": "Tên (Z-A)",
+      "age_asc": "Tuổi (Tăng dần)",
+      "age_desc": "Tuổi (Giảm dần)"
+    },
+    "activity": {
+      "title": "Nhật ký hoạt động",
+      "empty": "Chưa có hoạt động nào...",
+      "added": "<bold>{{name}}</bold> vừa được thêm mới.",
+      "updated": "<bold>{{name}}</bold> vừa được cập nhật.",
+      "deleted": "<bold>{{name}}</bold> vừa bị xóa khỏi hệ thống."
+    },
+    "common": {
+      "previous": "Trước",
+      "next": "Sau"
+    }
+  }
+}

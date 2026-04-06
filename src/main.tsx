@@ -5,7 +5,7 @@ import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Toaster } from "react-hot-toast";
-
+import "./i18n";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
